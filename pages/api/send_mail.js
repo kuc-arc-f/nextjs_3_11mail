@@ -6,7 +6,7 @@ export default async (req, res) => {
   try{
     var data = req.body
 //console.log( "from=", process.env.SEND_MAIL_ADDRESS)
-console.log( data )
+//console.log( data.title )
     var receiverEmailAddress = data.to_mail
     let transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -20,8 +20,8 @@ console.log( data )
     let info = await transporter.sendMail({
       from: process.env.SEND_MAIL_ADDRESS,
       to: receiverEmailAddress,
-      subject: "テスト用メールとなります 8",
-      text: "テスト用メールとなります 8 BODY",
+      subject: data.title,
+      text: data.content,
     });
 console.log("Message sent: %s", info.messageId);
 console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));     

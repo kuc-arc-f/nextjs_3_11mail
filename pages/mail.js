@@ -29,8 +29,12 @@ console.log("#clickHandler" )
   async proc_test(){
     try {
       var elemTo = document.getElementById('to_mail_address');
+      var elemTitle = document.getElementById('mail_title');
+      var elemContent = document.getElementById('mail_content');
       var item = {
-        to_mail : elemTo.value
+        to_mail : elemTo.value,
+        title: elemTitle.value,
+        content: elemContent.value,
       }
 //console.log(item)
       const res = await fetch(process.env.BASE_URL + '/api/send_mail', {
@@ -40,6 +44,7 @@ console.log("#clickHandler" )
       });
       if (res.status === 200) {
         var json = await res.json()
+        alert("Success, send mail")
 console.log(json)
 //        Router.push('/tasks');
       } else {
@@ -58,15 +63,28 @@ console.log(json)
         <h1>Test - mail send</h1>
         <hr />
         <div className="row">
-          <div className="col-md-6">
-            <div className="form-group">
-              <label>To mail:</label>
-              <input type="text" className="form-control" 
-              name="to_mail_address" id="to_mail_address"
-              defaultValue="hoge@test.com" />
-            </div>
+          <div className="col-sm-9 form-group">
+            <label>To mail:</label>
+            <input type="text" className="form-control" 
+            name="to_mail_address" id="to_mail_address"
+            defaultValue="hoge@test.com" />
           </div>
-        </div>        
+        </div>
+        <div className="row">
+          <div className="col-sm-6 form-group">
+            <label>Title:</label>
+            <input type="text" className="form-control"
+            name="mail_title" id="mail_title" 
+            defaultValue="title-1234"/>
+          </div>          
+        </div>
+        <div className="form-group">
+          <label>Mail Body:</label>
+          <textarea type="text" name="mail_content" id="mail_content"
+            className="form-control" rows="8" 
+            defaultValue="mail-body-1234" ></textarea>
+        </div>
+
         <hr />
         <button onClick={this.clickHandler.bind(this)}>Test-Mail
         </button>
