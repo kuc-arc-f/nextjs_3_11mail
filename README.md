@@ -38,5 +38,9 @@ yarn dev
 ***
 ### Blog :
 
+* Next.jsで、email を送信する例
+
+https://zenn.dev/knaka0209/articles/37f681a3fcdf15
+
 ***
 
